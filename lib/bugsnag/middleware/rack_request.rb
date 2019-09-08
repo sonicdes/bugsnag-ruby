@@ -21,7 +21,7 @@ module Bugsnag::Middleware
         # Add JSON body data as a param
         if request.content_type == "application/json"
           request.body.rewind
-          params["bugsnag_json_body"] = request.body.read
+          params["bugsnag_json_body"] = request.body.read(100000)
           request.body.rewind
         end
 
