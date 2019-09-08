@@ -19,7 +19,7 @@ module Bugsnag::Middleware
         session = env["rack.session"]
 
         # Add JSON body data as a param
-        if request.content_type == "application/json"
+        if request.content_type == "application/json" && report.configuration.send_json_body
           request.body.rewind
           params["bugsnag_json_body"] = request.body.read(100000)
           request.body.rewind

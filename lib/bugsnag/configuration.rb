@@ -21,6 +21,7 @@ module Bugsnag
     attr_accessor :ca_file
     attr_accessor :send_environment
     attr_accessor :send_code
+    attr_accessor :send_json_body
     attr_accessor :project_root
     attr_accessor :app_version
     attr_accessor :app_type
@@ -91,6 +92,7 @@ module Bugsnag
       self.auto_notify = true
       self.send_environment = false
       self.send_code = true
+      self.send_json_body = false
       self.meta_data_filters = Set.new(DEFAULT_META_DATA_FILTERS)
       self.hostname = default_hostname
       self.runtime_versions = {}

@@ -139,6 +139,7 @@ describe Bugsnag::Rack do
 
       config = double
       allow(config).to receive(:send_environment).and_return(true)
+      allow(config).to receive(:send_json_body).and_return(true)
       allow(config).to receive(:meta_data_filters).and_return(['email'])
       allow(report).to receive(:configuration).and_return(config)
       expect(report).to receive(:add_tab).once.with(:request, {
@@ -208,6 +209,7 @@ describe Bugsnag::Rack do
 
       config = double
       allow(config).to receive(:send_environment).and_return(true)
+      allow(config).to receive(:send_json_body).and_return(true)
       allow(config).to receive(:meta_data_filters).and_return(nil)
       allow(report).to receive(:configuration).and_return(config)
       expect(report).to receive(:add_tab).once.with(:environment, rack_env)
