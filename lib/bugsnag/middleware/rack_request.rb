@@ -18,8 +18,8 @@ module Bugsnag::Middleware
         client_ip = request.ip.to_s rescue SPOOF
         session = env["rack.session"]
 
-        # Parse JSON body data as a param
-        if request.post? && request.content_type == "application/json"
+        # Add JSON body data as a param
+        if request.content_type == "application/json"
           params["json_data"] = request.body.read
           request.body.rewind
         end

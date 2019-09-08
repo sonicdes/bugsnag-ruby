@@ -106,14 +106,24 @@ describe Bugsnag::Rack do
       rack_params = {
         :param => 'test'
       }
+
+      request_body = double
+      allow(request_body).to receive_messages(
+        :read => '{"test":"data"}',
+        :rewind => 0
+      )
+
+      allow(request_body).to receive(:rewind) { 0 }
       allow(rack_request).to receive_messages(
         :params => rack_params,
+        :body => request_body,
         :ip => "rack_ip",
         :request_method => "TEST",
         :path => "/TEST_PATH",
         :scheme => "http",
         :host => "test_host",
         :port => 80,
+        :content_type => "application/json",
         :referer => "https://bugsnag.com/about?email=hello@world.com&another_param=thing",
         :fullpath => "/TEST_PATH?email=hello@world.com&another_param=thing"
       )
@@ -167,14 +177,23 @@ describe Bugsnag::Rack do
       rack_params = {
         :param => 'test'
       }
+
+      request_body = double
+      allow(request_body).to receive_messages(
+        :read => '{"test":"data"}',
+        :rewind => 0
+      )
+
       allow(rack_request).to receive_messages(
         :params => rack_params,
+        :body => request_body,
         :ip => "rack_ip",
         :request_method => "TEST",
         :path => "/TEST_PATH",
         :scheme => "http",
         :host => "test_host",
         :port => 80,
+        :content_type => "application/json",
         :referer => "referer",
         :fullpath => "/TEST_PATH"
       )
